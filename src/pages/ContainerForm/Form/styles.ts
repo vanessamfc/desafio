@@ -1,8 +1,14 @@
 import styled from "styled-components";
-import { Button } from "@material-ui/core";
 
-import { Select } from "@material-ui/core/";
-export const Container = styled.div``;
-export const StyledSelect = styled(Select)`
-  width: 150px !important;
+import { Select } from "mui-rff";
+
+export const FormContainer = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FieldContainer = styled.div`
+  width: 350px;
+  padding: 10px;
 `;
