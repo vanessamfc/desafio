@@ -16,8 +16,10 @@ const ContainerForm: React.FC = () => {
   // To be passed to React Final Form
   const validateFormValues = async (values: any) => {
     const schema = Yup.object().shape({
-      name: Yup.string().min(3).max(5).required(),
+      name: Yup.string().min(3).max(5),
       age: Yup.number().max(15).required(),
+      sex: Yup.string().required(),
+      color: Yup.string().required(),
     });
     try {
       await schema.validate(values, { abortEarly: false });
