@@ -1,46 +1,56 @@
-import React from "react";
-import { Form as FinalForm, Field } from "react-final-form";
-import { setIn } from "final-form";
+import React, { useEffect, useState } from "react";
+import { Form as FinalForm } from "react-final-form";
 import * as Yup from "yup";
 import Form from "./Form";
+import { makeValidate, makeRequired } from "mui-rff";
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-// import { Container } from './styles';
-const onSubmit = async (values: any) => {
-  await sleep(300);
-  window.alert(JSON.stringify(values));
-};
+import { Container } from "./styles";
+import { addDog } from "../../store/modules/dogs/action";
+import { useDispatch } from "react-redux";
 
 const ContainerForm: React.FC = () => {
-  // To be passed to React Final Form
-  const validateFormValues = async (values: any) => {
-    const schema = Yup.object().shape({
-      name: Yup.string().min(3).max(5).required(),
-      age: Yup.number().max(15).required(),
-    });
-    try {
-      await schema.validate(values, { abortEarly: false });
-    } catch (err) {
-      const errors = err.inner.reduce(
-        (formError: object, innerError: { path: string; message: any }) => {
-          return setIn(formError, innerError.path, innerError.message);
-        },
-        {}
-      );
+  const [initialValue, setInitialValue] = useState();
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
-      return errors;
-    }
+  const schema = Yup.object().shape({
+    breed: Yup.string().required(),
+    subBreed: Yup.string(),
+    name: Yup.string().min(3).max(5),
+    age: Yup.number().max(15).required(),
+    sex: Yup.string().required(),
+    color: Yup.string().required(),
+  });
+  const validate = makeValidate(schema);
+  const required = makeRequired(schema);
+  useEffect(() => {
+    const values = localStorage.getItem("values");
+    setInitialValue(values ? JSON.parse(values) : {});
+    setLoading(false);
+  }, []);
+
+  const onSubmit = async (values: any, form: any) => {
+    dispatch(addDog(values));
+
+    localStorage.setItem("values", JSON.stringify({}));
+    setInitialValue({});
+    setTimeout(form.restart);
   };
 
   return (
-    <div>
-      <FinalForm
-        onSubmit={onSubmit}
-        validate={validateFormValues}
-        render={Form}
-      />
-    </div>
+    <>
+      {" "}
+      {!loading && (
+        <Container>
+          <FinalForm
+            initialValues={initialValue}
+            onSubmit={onSubmit}
+            validate={validate}
+            render={(form) => Form({ ...form, required })}
+          />
+        </Container>
+      )}
+    </>
   );
 };
 
