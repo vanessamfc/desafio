@@ -1,5 +1,9 @@
 import React, { useEffect, useCallback, useState, useMemo } from "react";
-import getBreeds from "../../../service/getBreeds";
+import {
+  getBreeds,
+  getImage,
+  getSubBreedImage,
+} from "../../../service/getBreeds";
 import { Field } from "react-final-form";
 import { Slider, MenuItem, Button } from "@material-ui/core/";
 import { FieldContainer, FormContainer } from "./styles";
@@ -11,6 +15,8 @@ const Form: React.FC<{
   required: any;
 }> = ({ handleSubmit, values, required }) => {
   const [dogBreeds, setDogBreeds] = useState<string>();
+  const [dogImage, setDogImage] = useState<string>();
+  const [dogSubBreedImage, setDogSubBreedImage] = useState<string>();
   const [breedValue, setBreedValue] = useState<number | undefined>();
 
   useEffect(() => {
@@ -29,7 +35,6 @@ const Form: React.FC<{
   const dogSexValue = useMemo(() => values?.sex, [values]);
   const dogAgeValue = useMemo(() => 1000 - values?.age * 60, [values]);
   const dogColorValue = useMemo(() => values?.color, [values]);
-
   useEffect(() => console.log(dogAgeValue), [dogAgeValue]);
 
   const getBreedsCallback = useCallback(async () => {
@@ -37,6 +42,28 @@ const Form: React.FC<{
     setDogBreeds(breed);
     console.log(breed);
   }, []);
+
+  const getImageCallback = useCallback(async () => {
+    const image = await getImage(values.breed);
+    setDogImage(image);
+    console.log(image);
+  }, [values.breed]);
+
+  const getsubBreedImageCallback = useCallback(async () => {
+    if (values.subBreed) {
+      const image = await getSubBreedImage(values.breed, values.subBreed);
+      setDogSubBreedImage(image);
+      console.log(image);
+    }
+  }, [values.breed, values.subBreed]);
+
+  useEffect(() => {
+    getsubBreedImageCallback();
+  }, [getsubBreedImageCallback, values.breed, values.subBreed]);
+
+  useEffect(() => {
+    getImageCallback();
+  }, [getImageCallback, values.breed]);
 
   useEffect(() => {
     getBreedsCallback();
@@ -67,7 +94,14 @@ const Form: React.FC<{
             </FieldContainer>
           )}
         </Field>
+        <Field name="dogImage" type="hidden" component="input">
+          {({ input }) => {
+            input.onChange(dogImage);
+            return <input {...input} />;
+          }}
+        </Field>
 
+        <img style={{ width: "50px" }} src={dogImage} alt="" />
         {values.breed &&
         dogBreeds?.[values.breed] &&
         dogBreeds?.[values.breed].length > 0 ? (
@@ -94,6 +128,7 @@ const Form: React.FC<{
                 </FieldContainer>
               )}
             </Field>
+            <img style={{ width: "50px" }} src={dogSubBreedImage} alt="" />
           </>
         ) : (
           <></>
