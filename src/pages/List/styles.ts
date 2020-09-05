@@ -3,7 +3,8 @@ import bg from "../../assets/bg.png";
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  flex-grow: 1;
   background: url(${bg}) repeat;
   background-size: 1000px;
   justify-content: center;
@@ -21,6 +22,7 @@ export const Container = styled.div`
   }
   > ul {
     display: flex;
+    min-height: 100vmin;
     padding: 10px;
     width: 80%;
     flex-direction: column;
