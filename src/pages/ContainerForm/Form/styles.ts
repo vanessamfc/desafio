@@ -6,11 +6,11 @@ export const FormContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  > img {
-  }
+  height: 100%;
 `;
 
 export const FieldContainer = styled.div`
-  width: 350px;
+  width: 300px;
+  height: 90px;
   padding: 10px;
 `;

@@ -17,7 +17,7 @@ const ContainerForm: React.FC = () => {
     breed: Yup.string().required(),
     subBreed: Yup.string(),
     name: Yup.string().min(3).max(5),
-    age: Yup.number().max(15).required(),
+    age: Yup.number().min(1).max(15).required(),
     sex: Yup.string().required(),
     color: Yup.string().required(),
   });

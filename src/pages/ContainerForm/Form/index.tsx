@@ -17,11 +17,6 @@ const Form: React.FC<{
   const [dogBreeds, setDogBreeds] = useState<string>();
   const [dogImage, setDogImage] = useState<string>();
   const [dogSubBreedImage, setDogSubBreedImage] = useState<string>();
-  const [breedValue, setBreedValue] = useState<number | undefined>();
-
-  useEffect(() => {
-    console.log(breedValue);
-  }, [breedValue]);
 
   const dogBreedList = useMemo(
     () => (dogBreeds ? Object.keys((dogBreeds as unknown) as object) : []),
@@ -32,10 +27,18 @@ const Form: React.FC<{
     () => (values?.breed?.toLocaleLowerCase().charCodeAt(1) - 96) * 100,
     [values]
   );
-  const dogSexValue = useMemo(() => values?.sex, [values]);
+  const dogSexValue = useMemo(
+    () => (values?.sex?.toLocaleLowerCase().charCodeAt(1) - 96) * 10,
+    [values]
+  );
   const dogAgeValue = useMemo(() => 1000 - values?.age * 60, [values]);
-  const dogColorValue = useMemo(() => values?.color, [values]);
-  useEffect(() => console.log(dogAgeValue), [dogAgeValue]);
+  const dogColorValue = useMemo(
+    () => (values?.color?.toLocaleLowerCase().charCodeAt(1) - 96) * 10,
+
+    [values]
+  );
+
+  useEffect(() => console.log(dogColorValue), [dogColorValue]);
 
   const getBreedsCallback = useCallback(async () => {
     const breed = await getBreeds();
@@ -91,6 +94,8 @@ const Form: React.FC<{
                   </MenuItem>
                 ))}
               </Select>
+
+              <div>{dogBreedValue}</div>
             </FieldContainer>
           )}
         </Field>
@@ -155,16 +160,18 @@ const Form: React.FC<{
                 name="sex"
                 label="Sexo"
               >
-                <MenuItem value={100}>Macho</MenuItem>
-                <MenuItem value={200}>Fêmea</MenuItem>
+                <MenuItem value="male">Macho</MenuItem>
+                <MenuItem value="female">Fêmea</MenuItem>
               </Select>
+
+              <div>{dogSexValue}</div>
             </FieldContainer>
           )}
         </Field>
         <FieldContainer>
           <label>Idade</label>
           <Field name="age" component="input">
-            {({ input }) => (
+            {({ input, meta }) => (
               <Slider
                 valueLabelDisplay="auto"
                 name="age"
@@ -185,17 +192,22 @@ const Form: React.FC<{
                 name="color"
                 label="Escolha uma cor"
               >
-                <MenuItem value={30}>Branco</MenuItem>
-                <MenuItem value={40}>Preto</MenuItem>
-                <MenuItem value={20}>Amarelo</MenuItem>
+                <MenuItem value="white">Branco</MenuItem>
+                <MenuItem value="black">Preto</MenuItem>
+                <MenuItem value="yellow">Amarelo</MenuItem>
               </Select>
             </FieldContainer>
           )}
         </Field>
 
+        <div>{dogColorValue}</div>
+
         <Button type="submit" variant="contained" color="primary">
           Salvar
         </Button>
+        <div>
+          total:{dogColorValue + dogSexValue + dogBreedValue + dogAgeValue}
+        </div>
         {/* <span>{JSON.stringify(values)}</span> */}
       </div>
     </FormContainer>
