@@ -14,12 +14,19 @@ const ContainerForm: React.FC = () => {
   const dispatch = useDispatch();
 
   const schema = Yup.object().shape({
-    breed: Yup.string().required(),
+    breed: Yup.string().required("Selecione uma raça"),
     subBreed: Yup.string(),
-    name: Yup.string().min(3).max(5),
-    age: Yup.number().min(1).max(15).required(),
-    sex: Yup.string().required(),
-    color: Yup.string().required(),
+    name: Yup.string()
+      .min(3, "Um nome com 3 a 5 letras deve ser escolhido")
+      .max(5, "Um nome com 3 a 5 letras deve ser escolhido")
+      .required("Um nome com 3 a 5 letras deve ser escolhido"),
+    age: Yup.number()
+      .typeError("A idade deve ser um número")
+      .min(1, "A idade escolhida deve estar entre 1 e 15")
+      .max(15, "A idade escolhida deve estar entre 1 e 15")
+      .required("Selecione uma idade"),
+    sex: Yup.string().required("Selecione um sexo"),
+    color: Yup.string().required("Selecione uma cor"),
   });
   const validate = makeValidate(schema);
   const required = makeRequired(schema);
@@ -30,6 +37,7 @@ const ContainerForm: React.FC = () => {
   }, []);
 
   const onSubmit = async (values: any, form: any) => {
+    console.log(values);
     dispatch(addDog(values));
 
     localStorage.setItem("values", JSON.stringify({}));
