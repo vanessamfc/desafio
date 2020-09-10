@@ -4,5 +4,10 @@ function addDog(values: any) {
     payload: { values },
   };
 }
-
-export { addDog };
+function deleteDog(index: number) {
+  return {
+    type: "@dogs/DELETE_DOG",
+    payload: { index },
+  };
+}
+export { addDog, deleteDog };

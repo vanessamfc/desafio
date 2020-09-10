@@ -23,11 +23,13 @@ export async function getImage(breed: string) {
 export async function getSubBreedImage(breed: string, sugbBreed: string) {
   try {
     const {
-      data: { message },
+      data: {
+        message: [subBreed],
+      },
     } = await Axios.get(
       `https://dog.ceo/api/breed/${breed}/${sugbBreed}/images/random/1`
     );
-    return message;
+    return subBreed;
   } catch (error) {
     console.error("Sorry, an error occurred loading this page");
   }
