@@ -1,4 +1,4 @@
-import produce from "immer";
+import produce from 'immer';
 
 const INITIAL_STATE = {
   dogList: [],
@@ -19,14 +19,12 @@ interface Action {
 export default function dogs(state: UserState = INITIAL_STATE, action: Action) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case "@dogs/ADD_DOG": {
-        console.log(action.payload.values);
+      case '@dogs/ADD_DOG': {
         draft.dogList.push(action.payload.values);
 
         break;
       }
-      case "@dogs/DELETE_DOG": {
-        console.log(action.payload.index);
+      case '@dogs/DELETE_DOG': {
         draft.dogList.splice(action.payload.index, 1);
         break;
       }

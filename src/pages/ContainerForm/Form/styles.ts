@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FormContainer = styled.form`
   display: flex;
@@ -7,7 +7,7 @@ export const FormContainer = styled.form`
   height: 100%;
   width: 100%;
   > div {
-    grid-template-areas: "image form";
+    grid-template-areas: 'image form';
     grid-template-columns: 1fr 1fr;
     height: 100%;
     width: 100%;

@@ -1,12 +1,13 @@
-import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
-import { Reducer } from "react";
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
+import { Reducer } from 'react';
+
 export default (reducers: Reducer<any, any>) => {
   const persistedReducer = persistReducer(
     {
-      key: "dogs",
+      key: 'dogs',
       storage,
-      whitelist: ["dogs"],
+      whitelist: ['dogs'],
     },
     reducers
   );

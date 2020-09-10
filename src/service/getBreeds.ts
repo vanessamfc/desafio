@@ -1,13 +1,13 @@
-import Axios from "axios";
+import Axios from 'axios';
 
 export async function getBreeds() {
   try {
     const {
       data: { message },
-    } = await Axios.get("https://dog.ceo/api/breeds/list/all");
+    } = await Axios.get('https://dog.ceo/api/breeds/list/all');
     return message;
   } catch (error) {
-    console.error("Sorry, an error occurred loading this page");
+    return false;
   }
 }
 export async function getImage(breed: string) {
@@ -17,7 +17,7 @@ export async function getImage(breed: string) {
     } = await Axios.get(`https://dog.ceo/api/breed/${breed}/images/random`);
     return message;
   } catch (error) {
-    console.error("Sorry, an error occurred loading this page");
+    return false;
   }
 }
 export async function getSubBreedImage(breed: string, sugbBreed: string) {
@@ -31,6 +31,6 @@ export async function getSubBreedImage(breed: string, sugbBreed: string) {
     );
     return subBreed;
   } catch (error) {
-    console.error("Sorry, an error occurred loading this page");
+    return false;
   }
 }
