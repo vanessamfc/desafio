@@ -1,9 +1,8 @@
-import styled from "styled-components";
-import bg from "../../assets/dogBg.jpg";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
-  grid-template-areas: "content imgContainer";
+  grid-template-areas: 'content imgContainer';
   grid-template-columns: 1fr 1fr;
   width: 100%;
   height: 100vh;
@@ -70,7 +69,7 @@ export const Container = styled.div`
 
   @media (max-width: 767px) {
     display: grid;
-    grid-template-areas: "content ";
+    grid-template-areas: 'content ';
     grid-template-columns: 1fr;
     width: 100%;
     height: 100vh;
@@ -136,18 +135,4 @@ export const Container = styled.div`
       }
     }
   }
-
-  /* &::after {
-    content: "";
-    background: url(${bg});
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: fixed;
-    background-position: center;
-    z-index: -1;
-    background-size: cover;
-    background-repeat: no-repeat;
-  } */
 `;

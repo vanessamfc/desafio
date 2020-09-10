@@ -1,11 +1,11 @@
-import React, { useEffect, useCallback, useState, useMemo } from "react";
-import { getBreeds } from "../../../service/getBreeds";
-import { Field } from "react-final-form";
-import { MenuItem, Button } from "@material-ui/core/";
-import { FieldContainer, FormContainer } from "./styles";
-import { Select, TextField } from "mui-rff";
-import ImageContainer from "./ImageContainer";
-import SubBreedField from "./SubBreedField";
+import React, { useEffect, useCallback, useState, useMemo } from 'react';
+import { Field } from 'react-final-form';
+import { MenuItem, Button } from '@material-ui/core/';
+import { Select, TextField } from 'mui-rff';
+import { FieldContainer, FormContainer } from './styles';
+import { getBreeds } from '../../../service/getBreeds';
+import ImageContainer from './ImageContainer';
+import SubBreedField from './SubBreedField';
 
 const Form: React.FC<{
   handleSubmit: () => void;
@@ -15,7 +15,7 @@ const Form: React.FC<{
   const [dogBreeds, setDogBreeds] = useState<string>();
 
   const dogBreedList = useMemo(
-    () => (dogBreeds ? Object.keys((dogBreeds as unknown) as object) : []),
+    () => (dogBreeds ? Object.keys((dogBreeds as unknown) as any) : []),
     [dogBreeds]
   );
 
@@ -47,7 +47,7 @@ const Form: React.FC<{
   }, [getBreedsCallback]);
 
   useEffect(() => {
-    localStorage.setItem("values", JSON.stringify({ ...values, price }));
+    localStorage.setItem('values', JSON.stringify({ ...values, price }));
   }, [price, values]);
 
   return (
@@ -102,12 +102,7 @@ const Form: React.FC<{
           <Field name="name">
             {({ input }) => (
               <FieldContainer>
-                <TextField
-                  {...input}
-                  name="name"
-                  label="Nome"
-                  type="text"
-                ></TextField>
+                <TextField {...input} name="name" label="Nome" type="text" />
               </FieldContainer>
             )}
           </Field>
@@ -131,12 +126,7 @@ const Form: React.FC<{
           <Field name="age">
             {({ input }) => (
               <FieldContainer>
-                <TextField
-                  {...input}
-                  name="age"
-                  label="idade"
-                  type="text"
-                ></TextField>
+                <TextField {...input} name="age" label="idade" type="text" />
 
                 <div>{`Valor: R$${price.age}`}</div>
               </FieldContainer>

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import bg from "../../assets/bg.png";
-import Button from "@material-ui/core/Button";
+import styled from 'styled-components';
+import bg from '../../assets/bg.png';
+
 export const Container = styled.div`
   display: flex;
   width: 100%;
@@ -11,7 +11,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   &::after {
-    content: "";
+    content: '';
     background-size: cover;
     top: 0;
     left: 0;

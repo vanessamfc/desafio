@@ -1,9 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import dogImg from "../../assets/dogImg.png";
-import { Container } from "./styles";
-
-import { FiSearch } from "react-icons/fi";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiSearch } from 'react-icons/fi';
+import dogImg from '../../assets/dogImg.png';
+import { Container } from './styles';
 
 const Home: React.FC = () => {
   return (
