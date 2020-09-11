@@ -1,7 +1,6 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaPaw } from 'react-icons/fa';
-import logo from '../../assets/paw.png';
 import { Container, StyledNavLink } from './styles';
 
 const Navbar: React.FC = () => {
