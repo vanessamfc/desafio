@@ -7,6 +7,8 @@ import { getBreeds } from '../../../service/getBreeds';
 import ImageContainer from './ImageContainer';
 import SubBreedField from './SubBreedField';
 
+// Componente principal do form
+
 const Form: React.FC<{
   handleSubmit: () => void;
   values: any;
@@ -14,11 +16,13 @@ const Form: React.FC<{
 }> = ({ handleSubmit, values, required }) => {
   const [dogBreeds, setDogBreeds] = useState<string>();
 
+  //useMemo que transforma o objeto em uma array
   const dogBreedList = useMemo(
     () => (dogBreeds ? Object.keys((dogBreeds as unknown) as any) : []),
     [dogBreeds]
   );
 
+  // useMemo responsável por definir e calcular os preços das características
   const price = useMemo(() => {
     const parcialPrice = {
       color: (values?.color?.toLocaleLowerCase().charCodeAt(1) - 96) * 10 || 0,
@@ -36,16 +40,17 @@ const Form: React.FC<{
     };
   }, [values]);
 
+  //Chamada a api para pegar as raças
   const getBreedsCallback = useCallback(async () => {
     const breed = await getBreeds();
     setDogBreeds(breed);
-    console.log(breed);
   }, []);
 
   useEffect(() => {
     getBreedsCallback();
   }, [getBreedsCallback]);
 
+  //useEffect para salvar os dados no local storage
   useEffect(() => {
     localStorage.setItem('values', JSON.stringify({ ...values, price }));
   }, [price, values]);

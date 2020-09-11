@@ -3,12 +3,16 @@ import { getImage, getSubBreedImage } from '../../../../service/getBreeds';
 import paw from '../../../../assets/paw.png';
 import { StyledContainer } from './styles';
 
+// Componente responsável por buscar e renderizar a imagem do cachorro
+
 const ImageContainer: React.FC<{
   input: any;
   breed: string;
   subBreed?: string;
 }> = ({ input, breed, subBreed }) => {
   const [imageUrl, setImageUrl] = useState('');
+
+  //Chamada a api para pegar a imagem do cachorro selecionado
   const getUrl = useCallback(async () => {
     setImageUrl('');
     const url = await (subBreed
