@@ -24,19 +24,19 @@ const Form: React.FC<{
 
   // useMemo responsável por definir e calcular os preços das características
   const price = useMemo(() => {
-    const parcialPrice = {
+    const partialPrice = {
       color: (values?.color?.toLocaleLowerCase().charCodeAt(1) - 96) * 10 || 0,
       age: 1000 - values?.age * 60 || 0,
       sex: (values?.sex?.toLocaleLowerCase().charCodeAt(1) - 96) * 10 || 0,
       breed: (values?.breed?.toLocaleLowerCase().charCodeAt(1) - 96) * 100 || 0,
     };
     return {
-      ...parcialPrice,
+      ...partialPrice,
       total:
-        parcialPrice.color +
-        parcialPrice.age +
-        parcialPrice.sex +
-        parcialPrice.breed,
+        partialPrice.color +
+        partialPrice.age +
+        partialPrice.sex +
+        partialPrice.breed,
     };
   }, [values]);
 

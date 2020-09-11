@@ -14,7 +14,7 @@ const Home: React.FC = () => {
           <span>
             <FiSearch />
           </span>
-          <strong>Procurar cachorro</strong>
+          <strong>Procure seu cachorro</strong>
         </Link>
       </div>
       <div>
