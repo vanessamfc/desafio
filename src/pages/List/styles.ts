@@ -9,7 +9,9 @@ export const Container = styled.div`
   background: url(${bg}) repeat;
   background-size: 1000px;
   justify-content: center;
+
   align-items: center;
+  padding-top: 60px;
   &::after {
     content: '';
     background-size: cover;
@@ -23,7 +25,6 @@ export const Container = styled.div`
   }
   > ul {
     display: flex;
-    min-height: 100vmin;
     padding: 10px;
     width: 80%;
     max-width: 1200px;

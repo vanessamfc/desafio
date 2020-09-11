@@ -6,6 +6,7 @@ export const FormContainer = styled.form`
   align-items: center;
   height: 100%;
   width: 100%;
+  padding: 30px 0;
   > div {
     grid-template-areas: 'image form';
     grid-template-columns: 1fr 1fr;
