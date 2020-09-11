@@ -13,6 +13,7 @@ const ContainerForm: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
+  //Schema Yup com validações
   const schema = Yup.object().shape({
     breed: Yup.string().required('Selecione uma raça'),
     subBreed: Yup.string(),
@@ -30,6 +31,7 @@ const ContainerForm: React.FC = () => {
   });
   const validate = makeValidate(schema);
   const required = makeRequired(schema);
+
   useEffect(() => {
     const values = localStorage.getItem('values');
     setInitialValue(values ? JSON.parse(values) : {});

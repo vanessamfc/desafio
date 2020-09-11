@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
-import { Select } from "mui-rff";
-import { FieldContainer } from "../styles";
-import { FieldInputProps } from "react-final-form";
-import { MenuItem } from "@material-ui/core";
-// import { Container } from './styles';
+import React, { useEffect } from 'react';
+import { Select } from 'mui-rff';
+import { FieldInputProps } from 'react-final-form';
+import { MenuItem } from '@material-ui/core';
+import { FieldContainer } from '../styles';
+
+// Componente responsável por buscar apenas as sub-raças
 
 const SubBreedField: React.FC<{
   input: FieldInputProps<any>;
@@ -12,7 +13,6 @@ const SubBreedField: React.FC<{
   breed: string;
 }> = ({ input, required, subBreedList = [], breed }) => {
   useEffect(() => {
-    console.log("aaaaaa");
     input.onChange(undefined);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [breed]);

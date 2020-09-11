@@ -1,5 +1,5 @@
 import Axios from 'axios';
-
+//Chamadas a api para buscar as raças e as imagens
 export async function getBreeds() {
   try {
     const {

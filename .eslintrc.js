@@ -33,6 +33,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'spaced-comment': 'off',
     'linebreak-style': 'off',
     'prettier/prettier': [
       'error',

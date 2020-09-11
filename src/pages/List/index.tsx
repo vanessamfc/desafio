@@ -4,6 +4,8 @@ import { FiX } from 'react-icons/fi';
 import { deleteDog } from '../../store/modules/dogs/action';
 import { Container } from './styles';
 
+//Componente responsável por renderizar as listas
+
 const List: React.FC = () => {
   // @ts-ignore
   const list = useSelector((state) => state.dogs.dogList) as any[];
