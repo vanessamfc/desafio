@@ -3,6 +3,7 @@ import { Form as FinalForm } from 'react-final-form';
 import * as Yup from 'yup';
 import { makeValidate, makeRequired } from 'mui-rff';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import Form from './Form';
 
 import { Container } from './styles';
@@ -40,9 +41,9 @@ const ContainerForm: React.FC = () => {
 
   const onSubmit = async (values: any, form: any) => {
     dispatch(addDog(values));
-
     localStorage.setItem('values', JSON.stringify({}));
     setInitialValue({});
+    toast.success('Adicionado a lista');
     // eslint-disable-next-line @typescript-eslint/no-implied-eval
     setTimeout(form.restart);
   };
